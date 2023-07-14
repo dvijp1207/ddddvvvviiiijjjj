@@ -42,8 +42,46 @@
       "password": "$2a$10$fb4j5582Gnwse7UE9qDvpuJPBgYgD/7PAqTGVyDWoiT.6OPl8bNpK",
       "name": "PRODUCTIZE IT (OPC) PRIVATE LIMITED",
       "gender": "female",
-      "hobbies": ["hoccky", "cricket", "football"],
+      "hobbies": [
+        "hoccky",
+        "cricket",
+        "football"
+      ],
       "id": 1
+    },
+    {
+      "email": "dvijpatel123@gmail.com",
+      "password": "$2a$10$y9fhUv51xwrqxMZXcn5b8ur0z/sR3CL8yY3Hda6ibD2fqtoC1dEw6",
+      "name": "plllll",
+      "gender": "male",
+      "hobbies": [
+        "cricket",
+        "hoccky",
+        "football"
+      ],
+      "id": 2
+    },
+    {
+      "email": "dvij@gmail.com",
+      "password": "$2a$10$TM7t3l19Yr68E5CAXPNTneNUdmQn2WNSzpmtigq7uRqZCz.9sFb2C",
+      "name": "dvij ppp",
+      "gender": "male",
+      "hobbies": [
+        "cricket",
+        "hoccky"
+      ],
+      "id": 3
+    },
+    {
+      "email": "dvijpatel1207@gmail.com",
+      "password": "$2a$10$IYrJ/hUYx1.tx.uvMGwEv.3qeLwHXeE3l40jkuVIpqaF.o1wRjawu",
+      "name": "patel",
+      "gender": "male",
+      "hobbies": [
+        "cricket",
+        "hoccky"
+      ],
+      "id": 4
     }
   ],
   "products": [

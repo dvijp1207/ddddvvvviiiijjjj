@@ -2,7 +2,7 @@ import { useCallback, useContext, useEffect, useState } from "react";
 import { StarIcon } from "@heroicons/react/24/solid";
 import axiosInstance from "../../axiosInstance.js";
 import { AuthContext } from "../../context/authContext";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import { useProducts } from "../../context/productsContext.js";
 
 type Props = {};
@@ -14,28 +14,54 @@ function classNames(...classes) {
 const Home = ({ routes }: Props) => {
   const { products, loadProducts } = useProducts();
   const { productCategory } = useParams();
+  const [searchParams] = useSearchParams();
 
-  useEffect(() => {
-    loadProducts(productCategory);
-  }, [productCategory]);
+  // console.log("searchParams",searchParams.get("price"));
 
   // const { productCategory } = useParams();
-  // const [filteredProducts, setFilteredProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
 
-  // useEffect(() => {
-  //   let finalProducts = products;
+  useEffect(() => {
+    // let finalProducts = products;
 
-  //   if (productCategory) {
-  //     finalProducts = products.filter((x) => x.category === productCategory);
-  //   }
-  //   setFilteredProducts(finalProducts);
-  // }, [products, productCategory]);
+    const price = searchParams.get("price");
 
-  // console.log(productCategory);
+    // if (productCategory) {
+    //   finalProducts = products.filter((x) => x.category === productCategory);
+    // }
+
+    const finalProducts = products.filter((x) => {
+      if (productCategory && price) {
+        const priceArr = price.split(",");
+        return (
+          x.category === productCategory &&
+          priceArr[0] < x.price &&
+          priceArr[1] > x.price
+        );
+      }
+      if (productCategory) {
+        return x.category === productCategory;
+      }
+      if (price) {
+        const priceArr = price.split(",");
+        return priceArr[0] < x.price && priceArr[1] > x.price;
+      }
+      // if(productCategory && price)  {
+
+      //   const priceArr = price.split(',')
+      //   return x.category === productCategory &&  priceArr[0] < x.price && priceArr[1] > x.price
+      // }
+      return true;
+    });
+
+    setFilteredProducts(finalProducts);
+  }, [products, productCategory, searchParams]);
+
+  console.log(productCategory);
 
   return (
     <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-      {products.map((product) => (
+      {filteredProducts.map((product) => (
         <div key={product.id} className="group relative">
           <Link to={`product/${product.id}`}>
             <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
@@ -57,7 +83,7 @@ const Home = ({ routes }: Props) => {
                 {new Intl.NumberFormat("en-IN", {
                   style: "currency",
                   currency: "INR",
-                }).format(100000)}
+                }).format(product.Price)}
               </p>
             </div>
             <div className="mt-2">

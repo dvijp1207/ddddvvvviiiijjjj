@@ -18,10 +18,8 @@ export const ProductsProvider = ({ children }: PropsWithChildren) => {
 
   const loadProducts = useCallback(async (category) => {
     try {
-      let url = "660/products";
-      if (category) {
-        url += `?category=${category}`;
-      }
+      const url = "660/products";
+     
       const res = await axiosInstance.get(url);
       setProducts(res);
     } catch (error) {
