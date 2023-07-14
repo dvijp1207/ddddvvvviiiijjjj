@@ -83,7 +83,7 @@ const Home = ({ routes }: Props) => {
                 {new Intl.NumberFormat("en-IN", {
                   style: "currency",
                   currency: "INR",
-                }).format(product.Price)}
+                }).format(product.price)}
               </p>
             </div>
             <div className="mt-2">

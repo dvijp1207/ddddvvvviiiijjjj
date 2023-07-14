@@ -16,7 +16,7 @@ export const ProductsContext = createContext<ProductsContextType>();
 export const ProductsProvider = ({ children }: PropsWithChildren) => {
   const [products, setProducts] = useState([]);
 
-  const loadProducts = useCallback(async (category) => {
+  const loadProducts = useCallback(async () => {
     try {
       const url = "660/products";
      
