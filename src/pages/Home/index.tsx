@@ -61,7 +61,9 @@ const Home = ({ routes }: Props) => {
 
   return (
     <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-      {filteredProducts.map((product) => (
+       { filteredProducts.map((product) => {
+        const cartItem = cart.find((x) => x.productId === product.id);
+        return (
         <div key={product.id} className="group relative">
           <Link to={`product/${product.id}`}>
             <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
@@ -113,7 +115,55 @@ const Home = ({ routes }: Props) => {
               </div>
             </div>
           </Link>
-          <button
+          {cartItem ? (
+              <div className="flex items-center">
+                <button
+                  type="button"
+                  className="mt-2 flex-1 justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  onClick={() =>
+                    updateCart({ ...cartItem, quantity: cartItem.quantity + 1 })
+                  }
+                >
+                  +
+                </button>
+                <p className="flex-1 text-center">{cartItem.quantity}</p>
+                <button
+                  type="button"
+                  className="mt-2 flex-1 justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  onClick={() => {
+                    if (cartItem.quantity <= 1) {
+                      deleteCart(cartItem);
+                    } else {
+                      updateCart({
+                        ...cartItem,
+                        quantity: cartItem.quantity - 1,
+                      });
+                    }
+                  }}
+                >
+                  -
+                </button>
+              </div>
+            ) : (
+              <button
+                type="button"
+                className="mt-2 flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                onClick={() =>
+                  addToCart({ productId: product.id, quantity: 1 })
+                }
+              >
+                Add to cart
+              </button>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+export default Home;
+          {/* <button
             type="button"
             className="mt-2 flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
@@ -125,4 +175,8 @@ const Home = ({ routes }: Props) => {
   );
 };
 
-export default Home;
+export default Home; */}
+
+
+
+
